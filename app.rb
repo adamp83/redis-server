@@ -22,4 +22,23 @@ class ServerApp < Sinatra::Base
     index_key = params[:index_key] || redis.get("#{project}:index:current")
     redis.get("#{project}:index:#{index_key}")
   end
+
+  get '/apple-app-site-association' do
+    content_type 'application/json'
+    settings = YAML.load_file('/var/www/redis_config.yml')
+    text=<<-ENDTEXT
+    {
+      "applinks": {
+          "apps": [],
+          "details": [
+              {
+                  "appID": "#{settings['app_id']}",
+                  "paths": [ "*" ]
+              }
+          ]
+      }
+    }
+    ENDTEXT
+    text
+  end
 end
