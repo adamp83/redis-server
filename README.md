@@ -4,6 +4,8 @@ This is a very basic Sinatra server to serve HTML from a redis store. It is take
 
 http://ember-cli-deploy.com/docs/v0.6.x/lightning-strategy-examples/#example-sinatra-app
 
+It includes Universal Links support, providing a /apple-app-site-association file if required.
+
 Steps to get this working:
 
 * Clone this repository to /var/www
@@ -18,6 +20,7 @@ This should be called redis_config.yml and be located in /var/www. The format is
     port: <redis port>
     password: <redis password>
     project: <name of your project - the redis key should match this>
+    app_id: <app_id for apple universal links, if required>
 
 # Installing nginx and Passenger (assuming an Ubuntu system):
 
@@ -29,7 +32,7 @@ Taken from here: https://www.phusionpassenger.com/library/walkthroughs/deploy/ru
     sudo apt-get update
     sudo apt-get install -y nginx-extras passenger
 
-Update /etc/nginx/nginx.conf - uncomment the line 
+Update /etc/nginx/nginx.conf - uncomment the line
 
     include /etc/nginx/passenger.conf;
 
