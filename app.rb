@@ -7,6 +7,7 @@ class ServerApp < Sinatra::Base
   settings = YAML.load_file('/var/www/redis_config.yml')
   redis = Redis.new(host: settings["host"], port: settings["port"], password: settings["password"])
   project = settings['project']
+  admin_project = settings['admin_project']
 
   # Serve the main website at /
   get '/' do
@@ -26,7 +27,7 @@ class ServerApp < Sinatra::Base
   get '/admin' do
     content_type 'text/html'
     index_key = params[:index_key] || redis.get("#{admin_project}:index:current")
-    redis.get("#{settings['admin_project']}:index:#{index_key}")
+    redis.get("#{admin_project}:index:#{index_key}")
   end
 
   # Create a apple-app-site-association JSON file
