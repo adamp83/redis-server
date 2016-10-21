@@ -55,3 +55,7 @@ Delete default file from /etc/nginx/sites-enabled and add server.conf:
     apt-get install ruby
     gem install sinatra
     gem install redis
+
+# Admin Interface
+
+This script optionally serves a separate admin app at /admin
